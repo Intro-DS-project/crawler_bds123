@@ -16,8 +16,10 @@ $ scrapy crawl bds123 -O output.json
 
 ### Using Docker :whale:
 ```bash
+$ docker build -t bds123 .
+$ docker run -v $(pwd):/app/data bds123
 ```
-
+The output will be saved in current directory
 
 Example output
 
