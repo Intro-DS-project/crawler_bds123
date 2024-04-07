@@ -26,14 +26,14 @@ Example output
 ```json
 [
   {
-    "price": 1.2,
-    "area": 14.0,
-    "street": "25/59 Phố Vũ Ngọc Phan",
-    "ward": "Phường Láng Hạ",
-    "district": "Đống Đa",
-    "post_date": "2024-04-03 10:20:00",
-    "url": "https://bds123.vn/cho-thue-phong-o-gia-re-tai-lang-ha-pr802246.html",
-    "description": "Diện tích 14m2. Giá thuê chỉ 1.2 triệu/ tháng. Điện nước tính riêng. Có khóa cổng an toàn. Giao thông thuận tiện, gần trạm xe buýt. Gần chợ Láng Hạ, trường ĐH Lao động Xã hội. Liên hệ A Hien: 0913238557.",
+    "price": 4.0,
+    "area": 35.0,
+    "street": "Trương Định",
+    "ward": "Tương Mai",
+    "district": "Hoàng Mai",
+    "post_date": "2024-04-06 14:50:00",
+    "url": "https://bds123.vn/cho-thue-phong-o-duoc-4-ng-35m2-hoang-mai-full-do-pr803570.html",
+    "description": "Phòng trọ khép kín, full nội thất. Diện tích 35M2 Hoàng Mai Ở được tối đa 4 người. Chỗ để xe rộng. Liên hệ trực tiếp chính chủ để biết thêm thông tin.",
     "num_bedroom": 0,
     "num_diningroom": 0,
     "num_kitchen": 0,
@@ -42,6 +42,6 @@ Example output
     "current_floor": 0,
     "direction": "",
     "street_width": ""
-  }, 
+  },
 ]
 ```

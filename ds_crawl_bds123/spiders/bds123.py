@@ -2,7 +2,7 @@ from datetime import datetime
 import scrapy
 
 from ds_crawl_bds123.items import DsCrawlBds123Item
-from ds_crawl_bds123.utils import format_date
+from ds_crawl_bds123.utils import format_date, format_location
 
 
 class Bds123Spider(scrapy.Spider):
@@ -44,8 +44,18 @@ class Bds123Spider(scrapy.Spider):
         # example: 'Địa chỉ: 25/59 Phố Vũ Ngọc Phan, Phường Láng Hạ, Đống Đa, Hà Nội'
         address = response.css(".item.post-address .address+span::text").get()
         item["street"] = address.split(",")[0].split(":")[1].strip()
+
+        # street may have house_number before partern "Phố", "Đường", "phố", "đường", cut it
+        street_pattern = ["Phố", "Đường", "phố", "đường"]
+        item["street"] = format_location(item["street"], street_pattern)
+
         item["ward"] = address.split(",")[1].strip()
+        ward_pattern = ["Phường", "phường", "xã", "Xã"]
+        item["ward"] = format_location(item["ward"], ward_pattern)
+
         item["district"] = address.split(",")[2].strip()
+        discrict_pattern = ["Quận", "Huyện", "quận", "huyện"]
+        item["district"] = format_location(item["district"], discrict_pattern)
 
         # example: 'Thứ 4, 10:20 03/04/2024'
         post_date = response.css(".d-inline-flex::attr(title)").get()
