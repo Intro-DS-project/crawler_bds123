@@ -4,8 +4,15 @@
 Requires python 3.8+ or later
 
 ```bash
-pip install Scrapy
+pip install -r requirements.txt
 ```
+
+Setup environment variables
+
+```bash
+cp .env.example .env
+```
+You need to provide your own `API_KEY` in `.env` file
 
 ### Run
 in root directory of project
