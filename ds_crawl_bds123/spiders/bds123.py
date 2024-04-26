@@ -2,7 +2,7 @@ from datetime import datetime
 import scrapy
 
 from ds_crawl_bds123.items import DsCrawlBds123Item
-from ds_crawl_bds123.utils import format_date, format_location
+from ds_crawl_bds123.utils import format_date, format_location, extract_description
 
 
 class Bds123Spider(scrapy.Spider):
@@ -66,16 +66,18 @@ class Bds123Spider(scrapy.Spider):
         description = response.css(
             ".margin-bottom-30+ .margin-bottom-30 div p::text").getall()
         item["description"] = " ".join(description)
+        num_bedroom, num_diningroom, num_kitchen, num_toilet, num_floor, current_floor, direction, street_width = extract_description(
+            description).split(",")
 
         # field don't have value
-        item["num_bedroom"] = 0
-        item["num_diningroom"] = 0
-        item["num_kitchen"] = 0
-        item["num_toilet"] = 0
-        item["num_floor"] = 0
-        item["current_floor"] = 0
-        item["direction"] = ""
-        item["street_width"] = ""
+        item["num_bedroom"] = num_bedroom
+        item["num_diningroom"] = num_diningroom
+        item["num_kitchen"] = num_kitchen
+        item["num_toilet"] = num_toilet
+        item["num_floor"] = num_floor
+        item["current_floor"] = current_floor
+        item["direction"] = direction
+        item["street_width"] = street_width
 
         yield item
 
