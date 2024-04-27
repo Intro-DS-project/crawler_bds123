@@ -3,6 +3,7 @@ import scrapy
 from hanoikovoidcdau import standardize
 
 from ds_crawl_bds123.items import DsCrawlBds123Item
+from ds_crawl_bds123.remote_database import init
 from ds_crawl_bds123.utils import format_date, format_location, extract_description
 
 
@@ -10,6 +11,7 @@ class Bds123Spider(scrapy.Spider):
     name = "bds123"
     allowed_domains = ["bds123.vn"]
     start_urls = ["https://bds123.vn/cho-thue-phong-tro-nha-tro-ha-noi.html"]
+    supabase = init()
 
     def start_requests(self):
         pages = []
@@ -84,6 +86,8 @@ class Bds123Spider(scrapy.Spider):
         item["direction"] = direction
         item["street_width"] = street_width
 
+        data, count = self.supabase.table(
+            "entries").insert(item.to_dict()).execute()
         yield item
 
     def format_date(str):
