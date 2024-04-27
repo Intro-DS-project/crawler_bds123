@@ -1,5 +1,6 @@
 from datetime import datetime
 import scrapy
+from hanoikovoidcdau import standardize
 
 from ds_crawl_bds123.items import DsCrawlBds123Item
 from ds_crawl_bds123.utils import format_date, format_location, extract_description
@@ -48,14 +49,18 @@ class Bds123Spider(scrapy.Spider):
         # street may have house_number before partern "Phố", "Đường", "phố", "đường", cut it
         street_pattern = ["Phố", "Đường", "phố", "đường"]
         item["street"] = format_location(item["street"], street_pattern)
+        item["street"] = standardize.standardize_street_name(item["street"])
 
         item["ward"] = address.split(",")[1].strip()
         ward_pattern = ["Phường", "phường", "xã", "Xã"]
         item["ward"] = format_location(item["ward"], ward_pattern)
+        item["ward"] = standardize.standardize_ward_name(item["ward"])
 
         item["district"] = address.split(",")[2].strip()
         discrict_pattern = ["Quận", "Huyện", "quận", "huyện"]
         item["district"] = format_location(item["district"], discrict_pattern)
+        item["district"] = standardize.standardize_district_name(
+            item["district"])
 
         # example: 'Thứ 4, 10:20 03/04/2024'
         post_date = response.css(".d-inline-flex::attr(title)").get()
